@@ -411,7 +411,7 @@ class System(object):
         :param event_count: number of events to generate
         :type event_count: int
         """
-        target.execute('monkey -p {} {}'.format(apk_name, event_count))
+        target.execute('monkey --pct-syskeys 0 -p {} {}'.format(apk_name, event_count))
 
     @staticmethod
     def list_packages(target, apk_filter=''):
