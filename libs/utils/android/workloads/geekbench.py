@@ -100,8 +100,9 @@ class Geekbench(Workload):
         self._log.info("%s", logcat_cmd)
         logcat = Popen(logcat_cmd, shell=True, stdout=PIPE)
 
+        self._log.info("%s", "send tap event")
         # Click to accept the EULA
-        System.tap(self._target, 73, 55)
+        System.tap(self._target, 1179, 555, absolute=True)
         sleep(1)
 
         # The main window opened will have the CPU benchmark
@@ -110,7 +111,7 @@ class Geekbench(Workload):
             System.hswipe(self._target, 10, 80, duration=100, swipe_right=False)
 
         # Press the 'RUN <test_name> BENCHMARK' button
-        System.tap(self._target, 73, 72)
+        System.tap(self._target, 1472, 320, absolute=True)
 
         while True:
 
