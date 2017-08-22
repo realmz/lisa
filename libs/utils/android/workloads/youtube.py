@@ -29,7 +29,7 @@ class YouTube(Workload):
     """
 
     # Package required by this workload
-    package = 'com.google.android.youtube'
+    package = 'com.paraphron.youtube'
     action = 'android.intent.action.VIEW'
 
     def __init__(self, test_env):
@@ -77,7 +77,7 @@ class YouTube(Workload):
         System.monkey(self._target, self.package)
 
         # Force screen in LANDSCAPE mode
-        Screen.set_orientation(self._target, portrait=False)
+        Screen.set_orientation(self._target, portrait=True)
 
         # Set min brightness
         Screen.set_brightness(self._target, auto=False, percent=0)
@@ -89,7 +89,6 @@ class YouTube(Workload):
         System.start_action(self._target, self.action, video_url)
         # Allow the activity to start
         sleep(1)
-
         # Wait until the end of the video
         self.tracingStart()
         self._log.info('Play video for %d [s]', video_duration_s)
