@@ -89,6 +89,7 @@ class YouTube(Workload):
         System.start_action(self._target, self.action, video_url)
         # Allow the activity to start
         sleep(1)
+	System.tap(self._target, 875, 875, absolute=True)
         # Wait until the end of the video
         self.tracingStart()
         self._log.info('Play video for %d [s]', video_duration_s)
