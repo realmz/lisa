@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/system/bin/sh
 
 # CPU to monitor
 CPU=${1:-0}
