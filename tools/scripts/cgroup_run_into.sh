@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/system/bin/sh
 #
 # SPDX-License-Identifier: Apache-2.0
 #
