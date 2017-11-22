@@ -142,6 +142,8 @@ class System(object):
         :param activity_name: name of the activity to launch
         :type activity_name: str
         """
+        log = logging.getLogger('System')
+        log.info('am start -n %s %s', apk_name, activity_name)
         target.execute('am start -n {}/{}'.format(apk_name, activity_name))
 
     @staticmethod
@@ -155,6 +157,8 @@ class System(object):
         :param action_args: arguments for the activity
         :type action_args: str
         """
+        log = logging.getLogger('System')
+        log.info('am start -a {} {}'.format(action, action_args))
         target.execute('am start -a {} {}'.format(action, action_args))
 
     @staticmethod
@@ -194,6 +198,9 @@ class System(object):
         :param clear: clear application data
         :type clear: bool
         """
+        log = logging.getLogger('System')
+        log.info('am force-stop {}'.format(apk_name))
+
         target.execute('am force-stop {}'.format(apk_name))
         if clear:
             target.execute('pm clear {}'.format(apk_name))
@@ -221,6 +228,8 @@ class System(object):
             x = w * x / 100
             y = h * y / 100
 
+        log = logging.getLogger('System')
+        log.info('input tap %d %d', x,y)
         target.execute('input tap {} {}'.format(x, y))
 
     @staticmethod
@@ -411,7 +420,7 @@ class System(object):
         :param event_count: number of events to generate
         :type event_count: int
         """
-        target.execute('monkey -p {} {}'.format(apk_name, event_count))
+        target.execute('monkey --pct-syskeys 0 -p {} {}'.format(apk_name, event_count))
 
     @staticmethod
     def list_packages(target, apk_filter=''):

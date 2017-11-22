@@ -1,0 +1,43 @@
+#!/bin/bash
+#set -x
+## ABI:
+#
+# arg1 : acme address
+# arg2 : probe number
+# arg3 : filename for attached data contents
+
+IN_ADDR=$1
+IN_PROBE=$2
+IN_FILENAME=$3
+
+if [ -f /tmp/pidfile-${IN_PROBE} ]
+then
+	echo "WARNING iio probe ${IN_PROBE} already running";
+	cat  /tmp/pidfile-${IN_PROBE} | xargs kill -9
+	sleep 2
+	sync
+	sudo rm -rf /tmp/pidfile-${IN_PROBE}
+fi
+
+if [ -z ${IN_FILENAME} ];then
+    IN_FILENAME=/tmp/iio-probe/default-${IN_PROBE}
+fi
+
+dir=`dirname ${IN_FILENAME}`
+mkdir -p $dir
+
+iio-capture --csv --fout ${IN_FILENAME} -n ${IN_ADDR} iio:device${IN_PROBE} > /tmp/stats-${IN_PROBE} &
+
+echo "text/csv" > ${IN_FILENAME}.mimetype
+
+## Trials with Gnuplot (remove the --csv option)
+#
+#echo set term png > /tmp/gnuplot-${IN_PROBE} 
+#echo set output \""${IN_FILENAME}".png\" >> /tmp/gnuplot-${IN_FILENAME}
+#echo "plot \""${IN_FILENAME}"\" binary format=\"%4int16%int64\" u 5:1 w l title \"vhsunt\", \\" >> /tmp/gnuplot-${IN_PROBE}
+#echo "\""${IN_FILENAME}"\" binary format=\"%4int16%int64\" u 5:2 w l title \"vbus\", \\" >> /tmp/gnuplot-${IN_PROBE}
+#echo "\""${IN_FILENAME}"\" binary format=\"%4int16%int64\" u 5:4 w l title \"current\", \\" >> /tmp/gnuplot-${IN_PROBE}
+#echo "\""${IN_FILENAME}"\" binary format=\"%4int16%int64\" u 5:3 w l title \"power\"" >> /tmp/gnuplot-${IN_PROBE}
+#echo "image/png" > ${IN_FILENAME}.png.mimetype
+
+echo $! > /tmp/pidfile-${IN_PROBE}

@@ -420,7 +420,8 @@ class ACME(EnergyMeter):
                 out, _ = self._iio[ch_id].communicate()
                 self._log.error('Output: [%s]', out.strip())
                 self._iio[ch_id] = None
-                raise RuntimeError('iio-capture connection error')
+                self._log.debug('iio-capture connection error')
+                continue
 
         self._log.debug('Started %s on %s...',
                         self._iiocapturebin, self._str(channel))
