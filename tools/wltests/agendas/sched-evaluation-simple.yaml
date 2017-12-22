@@ -14,7 +14,7 @@ global:
   # instrument (an example configuration is provided in this repo).
   instrumentation: [energy_measurement, trace-cmd, dmesg]
   # Do everything 5 times, if not otherwise specified by the specific workload
-  iterations: 2
+  iterations: 5
 
   # To aid reproducibility and try to reduce noise in power measurements,
   # minimise the screen brightness and set airplane mode on.
@@ -22,10 +22,6 @@ global:
     brightness: 0
     screen_on: true
     airplane_mode: true
-    sysfile_values:
-      /proc/sys/kernel/sched_use_walt_cpu_util: 1
-      /proc/sys/kernel/sched_use_walt_task_util: 1
-
 
 ################################################################################
 # SYSTEM CONFIGURATIONS
@@ -44,11 +40,10 @@ workloads:
 # Homescreen
 # Sit on the homescreen for 15 seconds
   - name: homescreen
-    id: homescreen
     classifiers:
-       tag: sit_3s
+       tag: sit_15s
     workload_parameters:
-      duration: 3
+      duration: 15
 
 ################################################################################
 # Exoplayer
@@ -57,81 +52,73 @@ workloads:
 # YouTube app, so it's hoped that this is a decent proxy for Youtube
 # performance on devices where running the real app is impractical.
   - name: exoplayer
-    id: exoplayer_mov720_30s
     classifiers:
-       tag: mov_720p_3s
+       tag: mov_720p_30s
     workload_parameters:
       format: "mov_720p"
-      duration: 3
+      duration: 30
 
 # Play 30 seconds of a OGG Vorbis audio with Exoplayer
   - name: exoplayer
-    id: exoplayer_ogg_128kbps_30s
     classifiers:
-       tag: ogg_128kbps_3s
+       tag: ogg_128kbps_30s
     workload_parameters:
       format: "ogg_128kbps"
-      duration: 3
+      duration: 30
 
 ################################################################################
 # PCMark
 
   - name: pcmark
-    id: pcmark
     classifiers:
-       tag: iter_5
-    iterations: 5
+       tag: single
+    iterations: 1
 
 ################################################################################
 # Geekbench
 
   - name: geekbench
-    id: geekbench
     classifiers:
-       tag: iter_3
+       tag: iter_30
     runtime_parameters:
       airplane_mode: false
-    iterations: 3
+    iterations: 1
 
 ################################################################################
 # Jankbench
 
   - name: jankbench
-    id: jankbench_list_view
     classifiers:
-      tag: iter_3
+      tag: iter_30
     workload_parameters:
       test: list_view
     iterations: 3
 
   - name: jankbench
-    id: jankbench_image_list_view
     classifiers:
-      tag: iter_3
+      tag: iter_30
     workload_parameters:
       test: image_list_view
-    iterations: 3
+    iterations: 3 
 
   - name: jankbench
-    id: jankbench_shadow_grid
     classifiers:
-      tag: iter_3
+      tag: iter_30
     workload_parameters:
       test: shadow_grid
     iterations: 3
 
   - name: jankbench
-    id: jankbench_low_hitrate_text
     classifiers:
-      tag: iter_3
+      tag: iter_30
     workload_parameters:
       test: low_hitrate_text
     iterations: 3
 
   - name: jankbench
-    id: jankbench_edit_text
     classifiers:
-      tag: iter_3
+      tag: iter_30
     workload_parameters:
       test: edit_text
     iterations: 3
+
