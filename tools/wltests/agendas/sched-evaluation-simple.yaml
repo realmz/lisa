@@ -14,7 +14,7 @@ global:
   # instrument (an example configuration is provided in this repo).
   instrumentation: [energy_measurement, trace-cmd, dmesg]
   # Do everything 5 times, if not otherwise specified by the specific workload
-  iterations: 5
+  iterations: 1
 
   # To aid reproducibility and try to reduce noise in power measurements,
   # minimise the screen brightness and set airplane mode on.
