@@ -65,14 +65,18 @@ class Workload(object):
 
         # Getting the list of installed packages
         cls._packages = test_env.target.list_packages()
-        _log.debug('Packages:\n%s', cls._packages)
+        #_log.debug('Packages:\n%s', cls._packages)
+        _log.info('Packages:\n%s', cls._packages)
 
         _log.debug('Building list of available workloads...')
         for sc in Workload._subclasses():
-            _log.debug('Checking workload [%s]...', sc.__name__)
+            #_log.debug('Checking workload [%s]...', sc.__name__)
+            _log.info('Checking workload [%s]...', sc.__name__)
+            _log.info('Checking workload [%s]...', sc.package)
             if sc.package in cls._packages or sc.package == '':
                 cls._availables[sc.__name__.lower()] = sc
 
+        _log.info('available:\n%s', cls._availables)
         _log.info('Supported workloads available on target:')
         _log.info('  %s', ', '.join(cls._availables.keys()))
 

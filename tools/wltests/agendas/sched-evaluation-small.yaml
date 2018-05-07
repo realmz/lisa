@@ -22,6 +22,10 @@ global:
     brightness: 0
     screen_on: true
     airplane_mode: true
+    sysfile_values:
+      /proc/sys/kernel/sched_use_walt_cpu_util: 1
+      /proc/sys/kernel/sched_use_walt_task_util: 1
+
 
 ################################################################################
 # SYSTEM CONFIGURATIONS
