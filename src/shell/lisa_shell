@@ -28,6 +28,10 @@ DEVMODE=${DEVMODE:-1}
 # Get base installation path of LISA
 export LISA_HOME="$(pwd)"
 
+export PATH=$LISA_HOME/../trace-cmd:$PATH
+export PATH=$LISA_HOME/../iio-capture:$PATH
+export PATH=$LISA_HOME/../android-sdk/platform-tools:$PATH
+
 export PYTHONPATH=''
 export PYTHONPATH=$LISA_HOME/libs/utils:$PYTHONPATH
 export PYTHONPATH=$LISA_HOME/libs/wlgen:$PYTHONPATH
