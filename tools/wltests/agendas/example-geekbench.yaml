@@ -1,0 +1,24 @@
+# This is an example agenda which shows a possible (rather large) set of
+# workloads and data collection.
+#
+# This will run 5 iterations each of a large set of workloads, under each of
+# PELT and WALT load tracking (it assumes that the target supports both
+# mechanisms).
+#
+
+global:
+  # Collect energy data, ftrace files, and dmesg
+  # You may want to edit your config.yaml to set up the energy_measurement
+  # instrument (an example configuration is provided in this repo).
+  instrumentation: [trace-cmd, dmesg]
+  # Do everything 5 times
+  iterations: 1
+
+  # To aid reproducibility and try to reduce noise in power measurements,
+  # minimise the screen brightness and set airplane mode on.
+  # TODO: will this break workloads that require internet?
+
+workloads:
+  - name: geekbench
+    id: geekbench
+

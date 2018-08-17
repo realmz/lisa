@@ -35,11 +35,11 @@ max_retries: 0
 bail_on_init_failure: false
 
 # Default result processors
-#result_processors: ['csv', 'status']
-#energy_measurement:
-#  instrument: acme_cape
-#  instrument_parameters:
-#    host: 10.65.34.1
-#    # If collecting on multiple channels, or another channel than iio:device0,
-#    # set them here:
-#    iio_devices: ['iio:device0']
+output_processors: ['csv', 'status']
+energy_measurement:
+  instrument: acme_cape
+  instrument_parameters:
+    host: 10.65.34.1
+    # If collecting on multiple channels, or another channel than iio:device0,
+    # set them here:
+    iio_devices: ['iio:device0']
