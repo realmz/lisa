@@ -1,0 +1,264 @@
+ ------------------------------------------
+ 4) kworker-28026  => shell s-11031 
+ ------------------------------------------
+
+ 4)               |  try_to_wake_up() {
+ 4)               |    _raw_spin_lock_irqsave() {
+ 4)   0.000 us    |      preempt_count_add();
+ 4)   2.084 us    |    }
+ 4)               |    _raw_spin_lock() {
+ 4)   0.521 us    |      preempt_count_add();
+ 4)   2.083 us    |    }
+ 4)               |    walt_ktime_clock() {
+ 4)               |      ktime_get() {
+ 4)   0.000 us    |        arch_counter_read();
+ 4)   2.083 us    |      }
+ 4)   3.646 us    |    }
+ 4)               |    walt_update_task_ravg() {
+ 4)               |      capacity_curr_of() {
+ 4)   0.000 us    |        cpufreq_scale_freq_capacity();
+ 4)   2.084 us    |      }
+ 4)               |      capacity_curr_of() {
+ 4)   0.000 us    |        cpufreq_scale_freq_capacity();
+ 4)   1.563 us    |      }
+ 4)   6.250 us    |    }
+ 4)               |    walt_update_task_ravg() {
+ 4)   1.041 us    |      update_history();
+ 4)   2.604 us    |    }
+ 4)               |    _raw_spin_unlock() {
+ 4)   0.520 us    |      preempt_count_sub();
+ 4)   2.083 us    |    }
+ 4)               |    select_task_rq_fair() {
+ 4)               |      select_energy_cpu_brute() {
+ 4)   0.521 us    |        __rcu_read_lock();
+ 4)               |        schedtune_task_boost() {
+ 4)   0.521 us    |          __rcu_read_lock();
+ 4)   0.521 us    |          __rcu_read_unlock();
+ 4)   4.688 us    |        }
+ 4)               |        schedtune_prefer_idle() {
+ 4)   0.521 us    |          __rcu_read_lock();
+ 4)   0.000 us    |          __rcu_read_unlock();
+ 4)   3.125 us    |        }
+ 4)               |        sync_entity_load_avg() {
+ 4)   0.520 us    |          cpufreq_scale_freq_capacity();
+ 4)               |          scale_cpu_capacity() {
+ 4)   0.000 us    |            cpufreq_scale_max_freq_capacity();
+ 4)   2.083 us    |          }
+ 4)   5.729 us    |        }
+ 4)               |        schedtune_task_boost() {
+ 4)   0.000 us    |          __rcu_read_lock();
+ 4)   0.000 us    |          __rcu_read_unlock();
+ 4)   3.125 us    |        }
+ 4)   0.521 us    |        cpufreq_scale_freq_capacity();
+ 4)   0.521 us    |        walt_cpu_high_irqload();
+ 4)   0.000 us    |        cpu_util_wake();
+ 4)   0.521 us    |        cpufreq_scale_freq_capacity();
+ 4)   0.521 us    |        walt_cpu_high_irqload();
+ 4)   0.000 us    |        cpu_util_wake();
+ 4)   0.521 us    |        idle_cpu();
+ 4)   0.000 us    |        idle_cpu();
+ 4)   0.000 us    |        __rcu_read_unlock();
+ 4) + 41.667 us   |      }
+ 4) + 43.750 us   |    }
+ 4)               |    set_task_cpu() {
+ 4)               |      migrate_task_rq_fair() {
+ 4)   0.000 us    |        sync_entity_load_avg();
+ 4)   1.562 us    |      }
+ 4)               |      walt_fixup_busy_time() {
+ 4)               |        _raw_spin_lock() {
+ 4)   0.521 us    |          preempt_count_add();
+ 4)   1.563 us    |        }
+ 4)               |        _raw_spin_lock() {
+ 4)   0.000 us    |          preempt_count_add();
+ 4)   1.563 us    |        }
+ 4)               |        ktime_get() {
+ 4)   0.000 us    |          arch_counter_read();
+ 4)   1.563 us    |        }
+ 4)               |        walt_update_task_ravg() {
+ 4)               |          capacity_curr_of() {
+ 4)   0.521 us    |            cpufreq_scale_freq_capacity();
+ 4)   1.563 us    |          }
+ 4)               |          capacity_curr_of() {
+ 4)   0.521 us    |            cpufreq_scale_freq_capacity();
+ 4)   1.563 us    |          }
+ 4)   6.250 us    |        }
+ 4)   0.521 us    |        walt_update_task_ravg();
+ 4)               |        walt_update_task_ravg() {
+ 4)               |          capacity_curr_of() {
+ 4)   0.000 us    |            cpufreq_scale_freq_capacity();
+ 4)   2.083 us    |          }
+ 4)   3.125 us    |        }
+ 4)               |        _raw_spin_unlock() {
+ 4)   0.000 us    |          preempt_count_sub();
+ 4)   2.083 us    |        }
+ 4)               |        _raw_spin_unlock() {
+ 4)   0.000 us    |          preempt_count_sub();
+ 4)   1.562 us    |        }
+ 4) + 30.729 us   |      }
+ 4)               |      set_task_rq_fair() {
+ 4)   0.000 us    |        set_task_rq_fair.part.79();
+ 4)   1.563 us    |      }
+ 4) + 39.583 us   |    }
+ 4)               |    smp_send_reschedule() {
+ 4)               |      smp_cross_call() {
+ 4)   0.521 us    |        gic_raise_softirq();
+ 4)   2.083 us    |      }
+ 4)   4.687 us    |    }
+ 4)               |    _raw_spin_unlock_irqrestore() {
+ 4)   0.000 us    |      preempt_count_sub();
+ 4)   2.083 us    |    }
+ 4) ! 128.125 us  |  }
+ 4)               |  try_to_wake_up() {
+ 4)               |    _raw_spin_lock_irqsave() {
+ 4)   0.521 us    |      preempt_count_add();
+ 4)   1.563 us    |    }
+ 4)               |    _raw_spin_lock() {
+ 4)   0.000 us    |      preempt_count_add();
+ 4)   2.083 us    |    }
+ 4)               |    walt_ktime_clock() {
+ 4)               |      ktime_get() {
+ 4)   0.521 us    |        arch_counter_read();
+ 4)   1.562 us    |      }
+ 4)   3.646 us    |    }
+ 4)   1.042 us    |    walt_update_task_ravg();
+ 4)   0.521 us    |    walt_update_task_ravg();
+ 4)               |    _raw_spin_unlock() {
+ 4)   0.521 us    |      preempt_count_sub();
+ 4)   1.563 us    |    }
+ 4)               |    select_task_rq_fair() {
+ 4)   0.520 us    |      select_energy_cpu_brute();
+ 4)   2.604 us    |    }
+ 4)               |    set_task_cpu() {
+ 4)               |      migrate_task_rq_fair() {
+ 4)               |        sync_entity_load_avg() {
+ 4)   0.521 us    |          cpufreq_scale_freq_capacity();
+ 4)               |          scale_cpu_capacity() {
+ 4)   0.000 us    |            cpufreq_scale_max_freq_capacity();
+ 4)   2.084 us    |          }
+ 4)   5.729 us    |        }
+ 4)   7.292 us    |      }
+ 4)               |      walt_fixup_busy_time() {
+ 4)               |        _raw_spin_lock() {
+ 4)   0.521 us    |          preempt_count_add();
+ 4)   1.563 us    |        }
+ 4)               |        _raw_spin_lock() {
+ 4)   0.521 us    |          preempt_count_add();
+ 4)   1.563 us    |        }
+ 4)               |        ktime_get() {
+ 4)   0.521 us    |          arch_counter_read();
+ 4)   1.563 us    |        }
+ 4)   0.000 us    |        walt_update_task_ravg();
+ 4)               |        walt_update_task_ravg() {
+ 4)               |          capacity_curr_of() {
+ 4)   0.000 us    |            cpufreq_scale_freq_capacity();
+ 4)   2.083 us    |          }
+ 4)               |          capacity_curr_of() {
+ 4)   0.000 us    |            cpufreq_scale_freq_capacity();
+ 4)   2.083 us    |          }
+ 4)   6.250 us    |        }
+ 4)               |        walt_update_task_ravg() {
+ 4)               |          capacity_curr_of() {
+ 4)   0.000 us    |            cpufreq_scale_freq_capacity();
+ 4)   2.083 us    |          }
+ 4)   3.125 us    |        }
+ 4)               |        _raw_spin_unlock() {
+ 4)   0.000 us    |          preempt_count_sub();
+ 4)   1.562 us    |        }
+ 4)               |        _raw_spin_unlock() {
+ 4)   0.521 us    |          preempt_count_sub();
+ 4)   1.562 us    |        }
+ 4) + 30.729 us   |      }
+ 4)               |      set_task_rq_fair() {
+ 4)   0.000 us    |        set_task_rq_fair.part.79();
+ 4)   2.084 us    |      }
+ 4) + 44.791 us   |    }
+ 4)               |    _raw_spin_lock() {
+ 4)   0.000 us    |      preempt_count_add();
+ 4)   2.083 us    |    }
+ 4)               |    activate_task() {
+ 4)               |      enqueue_task_fair() {
+ 4)               |        update_curr() {
+ 4)               |          cpuacct_charge() {
+ 4)   0.000 us    |            __rcu_read_lock();
+ 4)   0.000 us    |            __rcu_read_unlock();
+ 4)   4.688 us    |          }
+ 4)   6.250 us    |        }
+ 4)   0.521 us    |        cpufreq_scale_freq_capacity();
+ 4)               |        scale_cpu_capacity() {
+ 4)   0.000 us    |          cpufreq_scale_max_freq_capacity();
+ 4)   2.084 us    |        }
+ 4)               |        sugov_update_shared() {
+ 4)               |          sugov_get_util() {
+ 4)               |            scale_cpu_capacity() {
+ 4)   0.521 us    |              cpufreq_scale_max_freq_capacity();
+ 4)   3.125 us    |            }
+ 4)   0.000 us    |            sched_avg_update();
+ 4)               |            boosted_cpu_util() {
+ 4)   0.000 us    |              schedtune_cpu_boost();
+ 4)   1.562 us    |            }
+ 4)   9.896 us    |          }
+ 4)               |          _raw_spin_lock() {
+ 4)   0.000 us    |            preempt_count_add();
+ 4)   1.563 us    |          }
+ 4)   0.000 us    |          sugov_update_commit();
+ 4)               |          _raw_spin_unlock() {
+ 4)   0.521 us    |            preempt_count_sub();
+ 4)   1.562 us    |          }
+ 4) + 19.271 us   |        }
+ 4)               |        attach_entity_load_avg.part.31() {
+ 4)               |          sugov_update_shared() {
+ 4)               |            sugov_get_util() {
+ 4)               |              scale_cpu_capacity() {
+ 4)   0.000 us    |                cpufreq_scale_max_freq_capacity();
+ 4)   1.563 us    |              }
+ 4)   0.000 us    |              sched_avg_update();
+ 4)               |              boosted_cpu_util() {
+ 4)   0.000 us    |                schedtune_cpu_boost();
+ 4)   1.562 us    |              }
+ 4)   8.333 us    |            }
+ 4)               |            _raw_spin_lock() {
+ 4)   0.000 us    |              preempt_count_add();
+ 4)   2.083 us    |            }
+ 4)   0.000 us    |            sugov_update_commit();
+ 4)               |            _raw_spin_unlock() {
+ 4)   0.000 us    |              preempt_count_sub();
+ 4)   1.563 us    |            }
+ 4) + 17.708 us   |          }
+ 4) + 19.271 us   |        }
+ 4)   0.000 us    |        update_cfs_shares();
+ 4)   0.000 us    |        account_entity_enqueue();
+ 4)   0.520 us    |        check_spread.isra.36();
+ 4)   0.000 us    |        walt_inc_cfs_cumulative_runnable_avg();
+ 4)               |        schedtune_enqueue_task() {
+ 4)               |          _raw_spin_lock_irqsave() {
+ 4)   0.000 us    |            preempt_count_add();
+ 4)   2.084 us    |          }
+ 4)   0.000 us    |          __rcu_read_lock();
+ 4)   0.000 us    |          __rcu_read_unlock();
+ 4)               |          _raw_spin_unlock_irqrestore() {
+ 4)   0.521 us    |            preempt_count_sub();
+ 4)   1.563 us    |          }
+ 4)   9.375 us    |        }
+ 4)   0.521 us    |        walt_inc_cumulative_runnable_avg();
+ 4)   0.521 us    |        __cpu_overutilized();
+ 4)   0.521 us    |        hrtick_update();
+ 4) + 78.125 us   |      }
+ 4) + 80.729 us   |    }
+ 4)               |    ttwu_do_wakeup() {
+ 4)               |      check_preempt_curr() {
+ 4)               |        check_preempt_wakeup() {
+ 4)   0.000 us    |          update_curr();
+ 4)   2.084 us    |        }
+ 4)   4.166 us    |      }
+ 4)   6.250 us    |    }
+ 4)               |    _raw_spin_unlock() {
+ 4)   0.000 us    |      preempt_count_sub();
+ 4)   1.563 us    |    }
+ 4)               |    _raw_spin_unlock_irqrestore() {
+ 4)   0.000 us    |      preempt_count_sub();
+ 4)   1.563 us    |    }
+ 4) ! 168.750 us  |  }
+ 6)               |  /* casec: task=sh pid=31117 capacity_orig=462 new_util=162 target_max_spare_cap=300 target_cpu=1 */
+ 6)               |  /* caseb2: task=sh pid=31117 idle_min_cap=462 idle_cpu=2 */
+ 6)               |  /* caseb1: task=sh pid=31117 deep_idle_cpu=3 */
+
